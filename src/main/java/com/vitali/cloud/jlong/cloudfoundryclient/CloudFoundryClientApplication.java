@@ -1,5 +1,6 @@
 package com.vitali.cloud.jlong.cloudfoundryclient;
 
+import lombok.RequiredArgsConstructor;
 import org.cloudfoundry.client.CloudFoundryClient;
 import org.cloudfoundry.operations.DefaultCloudFoundryOperations;
 import org.cloudfoundry.reactor.ConnectionContext;
@@ -13,8 +14,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.PostConstruct;
 
 @SpringBootApplication
+@RequiredArgsConstructor
 public class CloudFoundryClientApplication {
 
     private static final String DOUBLE_SLASH = "://";
@@ -54,7 +59,7 @@ public class CloudFoundryClientApplication {
     public DefaultCloudFoundryOperations cloudFoundryOperations(CloudFoundryClient cloudFoundryClient,
                                                                 ReactorDopplerClient dopplerClient,
                                                                 ReactorUaaClient uaaClient,
-                                                                @Value("${cf.api}") String organization,
+                                                                @Value("${cf.org}") String organization,
                                                                 @Value("${cf.space}") String space) {
         return DefaultCloudFoundryOperations.builder()
                 .cloudFoundryClient(cloudFoundryClient)

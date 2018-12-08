@@ -13,8 +13,11 @@ public class ApplicationListingCommandLineRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        System.out.println("App is starting");
         cf.applications()
                 .list()
                 .subscribe(System.out::println);
+
+        System.out.println("App started");
     }
 }
