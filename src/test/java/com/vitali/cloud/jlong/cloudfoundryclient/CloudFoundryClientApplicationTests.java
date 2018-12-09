@@ -31,14 +31,14 @@ public class CloudFoundryClientApplicationTests {
         File projectFolder = new File(new File("."), "../customerapplication");
         File jar = new File(projectFolder, "target/customerapplication-0.0.1-SNAPSHOT.jar");
 
-        String applicationName = "bootcamps-customers";
-        String mysqlSvc = "mysql";
+        String applicationName = "vitali-customers";
+        String mysqlSvc = "customers-mysql";
         Map<String, String> env = new HashMap<>();
         env.put("SPRING_PROFILES_ACTIVE", "cloud");
 
         Duration timeout = Duration.ofMinutes(5);
 
-        serviceDeployer.deployService(applicationName, mysqlSvc, "ClearDB MySQL Database", "Spark DB")
+        serviceDeployer.deployService(applicationName, mysqlSvc, "cleardb", "spark")
                 .then(applicationDeployer.deployApplication(jar, applicationName, env, timeout, mysqlSvc))
                 .block();
     }
